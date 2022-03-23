@@ -17,10 +17,8 @@ export const ChartCard = ({serie}) => {
   
   // const [updateComp,setUpdateComp]=useState(0)
 
-  useEffect(()=>{
-    console.log(options)
-    console.log(ref.current)
-  },[options,data,graphType])
+  // useEffect(()=>{
+  // },[options,data,graphType])
 
   const downloadImage=()=>{
     const link=document.createElement('a');

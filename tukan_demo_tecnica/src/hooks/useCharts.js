@@ -8,7 +8,7 @@ import { AppContext } from '../Context/AppContext'
 export const useCharts = (serie) => {
     const [graphType,setGraphType]=useState("line")
     const [showAddSeriesButon,setShowAddSeriesButon]=useState(false)
-    const {dataSeries}=useContext(AppContext)
+    const {token,dataSeries,setDataSeries}=useContext(AppContext)
 
     // const [options,setOptions] = useState({
     //     plugins: {
@@ -41,7 +41,7 @@ export const useCharts = (serie) => {
         datasets: [
           {
             label: serie.idSerie,
-            data: serie.datos.map(value=>value.dato),
+            data: serie.datos.map(value=>value.dato),  
             borderColor: 'rgb(255, 99, 132)',
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
           },
@@ -68,10 +68,11 @@ export const useCharts = (serie) => {
         }
     }
 
-    const addMoreSeries=(addSerie)=>{
+    const addMoreSeries=async(addSerie)=>{
         const seriesArray=dataSeries.map(serie=>serie.idSerie)
         if (seriesArray.includes(addSerie)) {
             const newData={...data}
+
             newData.datasets.push({
               label: dataSeries[seriesArray.indexOf(addSerie)].idSerie,
               data: dataSeries[seriesArray.indexOf(addSerie)].datos.map(value=>value.dato),
@@ -80,8 +81,24 @@ export const useCharts = (serie) => {
             })
             setData(newData)
             
-        }else{
-            console.log('no incluye',addSerie)
+        }else{            
+          const newSerie=await fetchData(token,addSerie)
+          const newDateSeries=[...dataSeries]
+          newDateSeries.push(newSerie[0])
+          setDataSeries(newDateSeries)
+          
+          const seriesArray=newDateSeries.map(serie=>serie.idSerie)
+          console.log(seriesArray)
+          const newData={...data}
+
+            newData.datasets.push({
+              label: newDateSeries[seriesArray.indexOf(addSerie)].idSerie,
+              data: newDateSeries[seriesArray.indexOf(addSerie)].datos.map(value=>value.dato),
+              borderColor: 'rgb(25, 99, 132)',
+              backgroundColor: 'rgba(25, 99, 132, 0.5)',
+            })
+          console.log(newData)
+          // setData(newData)
         }
     }
 
