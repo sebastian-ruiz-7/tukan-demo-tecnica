@@ -7,16 +7,19 @@ import { Chart } from 'react-chartjs-2';
 import { useCharts } from '../../hooks/useCharts';
 //Import styles
 import './ChartCard.css'
+
 export const ChartCard = ({serie}) => {
 
   const ref=React.useRef(null)
 
   const {options,data,graphType,updateGraphType,handleMoreSeries}=useCharts(serie)
   
-  const [updateComp,setUpdateComp]=useState(0)
+  
+  // const [updateComp,setUpdateComp]=useState(0)
 
   useEffect(()=>{
-    setUpdateComp(prev=>prev+1)
+    console.log(options)
+    console.log(ref.current)
   },[options,data,graphType])
 
   const downloadImage=()=>{
@@ -45,7 +48,7 @@ export const ChartCard = ({serie}) => {
             <option value="SF43718">SF43718</option> 
       </select>
     
-      <h1 className='update-Comp'>{updateComp}</h1>
+      {/* <h1 className='update-Comp'>{updateComp}</h1> */}
     </div>
   )
 }

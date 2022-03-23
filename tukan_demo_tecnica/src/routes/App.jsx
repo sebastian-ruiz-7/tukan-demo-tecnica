@@ -15,13 +15,15 @@ function App() {
 
   return (
     <AppContext.Provider value={initialState}>
-      <main>
+      <header>
         <h1>BANXICO API VISUALIZER</h1>
+      </header>
+      
+      <main>
 
         <FormContainer />
 
         <ChartsContainers />
-
 
       </main>
     </AppContext.Provider>

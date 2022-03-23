@@ -10,20 +10,7 @@ export const useCharts = (serie) => {
     const [showAddSeriesButon,setShowAddSeriesButon]=useState(false)
     const {dataSeries}=useContext(AppContext)
 
-    const [options,setOptions] = useState({
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: serie.titulo,
-          },
-    
-        },
-      })
-    
-    // const options={
+    // const [options,setOptions] = useState({
     //     plugins: {
     //       legend: {
     //         position: 'top',
@@ -34,7 +21,20 @@ export const useCharts = (serie) => {
     //       },
     
     //     },
-    //   }
+    //   })
+    
+    const options={
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: serie.idSerie + ' - ' + serie.titulo,
+          },
+    
+        },
+      }
 
     const [data,setData] = useState({
         labels:serie.datos.map(date=>date.fecha),
@@ -71,8 +71,15 @@ export const useCharts = (serie) => {
     const addMoreSeries=(addSerie)=>{
         const seriesArray=dataSeries.map(serie=>serie.idSerie)
         if (seriesArray.includes(addSerie)) {
-            //options.plugins.title.text=`${serie.titulo} Actualizado `
-
+            const newData={...data}
+            newData.datasets.push({
+              label: dataSeries[seriesArray.indexOf(addSerie)].idSerie,
+              data: dataSeries[seriesArray.indexOf(addSerie)].datos.map(value=>value.dato),
+              borderColor: 'rgb(25, 99, 132)',
+              backgroundColor: 'rgba(25, 99, 132, 0.5)',
+            })
+            setData(newData)
+            
         }else{
             console.log('no incluye',addSerie)
         }
