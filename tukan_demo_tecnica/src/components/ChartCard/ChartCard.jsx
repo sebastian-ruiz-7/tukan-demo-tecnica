@@ -12,7 +12,7 @@ export const ChartCard = ({serie}) => {
 
   const ref=React.useRef(null)
 
-  const {options,data,graphType,updateGraphType,handleMoreSeries}=useCharts(serie)
+  const {options,data,graphType,updateGraphType,handleMoreSeries,showAddSeriesButon}=useCharts(serie)
   
   
   // const [updateComp,setUpdateComp]=useState(0)
@@ -39,6 +39,7 @@ export const ChartCard = ({serie}) => {
             <option value="line">Linea</option> 
       </select>
 
+
       <select className='add-more-series' onChange={event=>handleMoreSeries(event.target.value)} name="" id="">
             <option value="addSeries">Añadir más series</option>
             <option value="SF61745">SF61745</option>
@@ -46,7 +47,7 @@ export const ChartCard = ({serie}) => {
             <option value="SF43718">SF43718</option> 
       </select>
     
-      {/* <h1 className='update-Comp'>{updateComp}</h1> */}
+      
     </div>
   )
 }

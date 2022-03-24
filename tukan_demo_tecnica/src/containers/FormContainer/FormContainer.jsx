@@ -8,7 +8,8 @@ import { AppContext } from '../../Context/AppContext'
 import './FormContainer.css'
 
 export const FormContainer = () => {
-    const form=useRef(null)
+  
+  const form=useRef(null)
 
   const {setToken,setDataSeries}=useContext(AppContext)
 

@@ -7,7 +7,7 @@ import { AppContext } from '../Context/AppContext'
 
 export const useCharts = (serie) => {
     const [graphType,setGraphType]=useState("line")
-    const [showAddSeriesButon,setShowAddSeriesButon]=useState(false)
+    const [currentSeries,setCurrentsSeries] = useState([serie.idSerie])
     const {token,dataSeries,setDataSeries}=useContext(AppContext)
 
     // const [options,setOptions] = useState({
@@ -22,6 +22,14 @@ export const useCharts = (serie) => {
     
     //     },
     //   })
+
+    const getRandomColor=()=>{
+      const colors=['#713E5A','#63A375','#EDC79B','#D57A66','#CA6680','#D6E5E3','#CACFD6']
+
+      const randomIndex=Math.floor(Math.random()*colors.length)
+
+      return colors[randomIndex]
+    }
     
     const options={
         plugins: {
@@ -36,14 +44,16 @@ export const useCharts = (serie) => {
         },
       }
 
+    const randomColor=getRandomColor()
+
     const [data,setData] = useState({
         labels:serie.datos.map(date=>date.fecha),
         datasets: [
           {
             label: serie.idSerie,
             data: serie.datos.map(value=>value.dato),  
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: randomColor,
+            backgroundColor: randomColor,
           },
         ],
       })
@@ -71,36 +81,50 @@ export const useCharts = (serie) => {
     const addMoreSeries=async(addSerie)=>{
         const seriesArray=dataSeries.map(serie=>serie.idSerie)
         if (seriesArray.includes(addSerie)) {
-            const newData={...data}
 
+          if (currentSeries.includes(addSerie)) {
+            return true
+          }else{
+
+            //Process to add the new Serie to the chart
+            const newData={...data}
+            const randomColor=getRandomColor()
             newData.datasets.push({
               label: dataSeries[seriesArray.indexOf(addSerie)].idSerie,
               data: dataSeries[seriesArray.indexOf(addSerie)].datos.map(value=>value.dato),
-              borderColor: 'rgb(25, 99, 132)',
-              backgroundColor: 'rgba(25, 99, 132, 0.5)',
+              borderColor: randomColor,
+              backgroundColor: randomColor,
             })
             setData(newData)
+
+            //Process to prevent add the same serie to the chart
+            const newCurrentSeries=[...currentSeries]
+            newCurrentSeries.push(addSerie)
+            setCurrentsSeries(newCurrentSeries)
+          }
             
-        }else{            
+        }else{
+          //Fetching the new array    
           const newSerie=await fetchData(token,addSerie)
           const newDateSeries=[...dataSeries]
           newDateSeries.push(newSerie[0])
           setDataSeries(newDateSeries)
           
           const seriesArray=newDateSeries.map(serie=>serie.idSerie)
-          console.log(seriesArray)
+          
+          //Adding new serie to the chart
           const newData={...data}
+          const randomColor=getRandomColor()
 
-            newData.datasets.push({
-              label: newDateSeries[seriesArray.indexOf(addSerie)].idSerie,
-              data: newDateSeries[seriesArray.indexOf(addSerie)].datos.map(value=>value.dato),
-              borderColor: 'rgb(25, 99, 132)',
-              backgroundColor: 'rgba(25, 99, 132, 0.5)',
-            })
-          console.log(newData)
-          // setData(newData)
+          newData.datasets.push({
+            label: newDateSeries[seriesArray.indexOf(addSerie)].idSerie,
+            data: newDateSeries[seriesArray.indexOf(addSerie)].datos.map(value=>value.dato),
+            borderColor: randomColor,
+            backgroundColor: randomColor,
+          })
         }
     }
+
 
     const handleMoreSeries=(e)=>{
         if (e==='addSeries') {
@@ -110,8 +134,10 @@ export const useCharts = (serie) => {
         }
     }
 
+    
+
     return {
-        graphType,updateGraphType,options,data,handleMoreSeries,showAddSeriesButon
+        graphType,updateGraphType,options,data,handleMoreSeries
     }
 }
 
