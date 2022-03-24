@@ -28,10 +28,13 @@ export const FormContainer = () => {
     <form ref={form}>
           <label htmlFor="token">Token</label>
           {/* Delete the Value from the input tag, this is just for dev */}
-          <input type="text" name='token' placeholder='01f04831044...' value={'01f04831044f073702d9244604d41c055e7c14bb96218e169926482fb5699788'}/>
+          {/* <input type="text" name='token' placeholder='01f04831044...' value={'01f04831044f073702d9244604d41c055e7c14bb96218e169926482fb5699788'}/> */}
+          <input type="text" name='token' placeholder='01f04831044...'/>
           <label htmlFor="series">Series</label>
           <input type="text" name='series' placeholder='Example: SF61745,SP68257'/>
           <button onClick={handleSubmit}>Fetch</button>
+
+          
     </form>
   )
 }

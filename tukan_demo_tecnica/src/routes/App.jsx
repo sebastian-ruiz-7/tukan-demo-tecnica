@@ -3,11 +3,13 @@ import React from 'react'
 import { useInititalState } from '../hooks/useInititalState'
 //Import Context
 import { AppContext } from '../Context/AppContext'
-//Import styles
-import './App.css'
 //Import containers
 import { FormContainer } from '../containers/FormContainer/FormContainer'
 import { ChartsContainers } from '../containers/ChartsContainers/ChartsContainers'
+//Import components
+import { Header } from '../components/Header/Header'
+//Import styles
+import './App.css'
 
 function App() {
   
@@ -15,11 +17,12 @@ function App() {
 
   return (
     <AppContext.Provider value={initialState}>
-      <header>
-        <h1>BANXICO API VISUALIZER</h1>
-      </header>
       
+      <Header />
+
       <main>
+
+        <h1>BANXICO API VISUALIZER</h1>
 
         <FormContainer />
 

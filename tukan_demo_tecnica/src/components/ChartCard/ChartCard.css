@@ -1,8 +1,11 @@
 .line-chart{
-    width: 1000px;
+    width: 100%;
+    min-width: 300px;
+    max-width: 850px;
     /* background-color: beige; */
-    padding: 30px;
-    margin: 50px;
+    
+    margin: 0px auto;
+    box-sizing: border-box;
 }
 /* 
 .update-Comp{

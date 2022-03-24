@@ -1,0 +1,35 @@
+.header-container{
+    width: 100%;
+    display: flex;
+    background-color: var(--blue);
+    box-sizing: border-box;
+    align-items: center;
+    height: 40px;
+    justify-content: space-between;
+    padding: 0px 5%;
+}
+
+.header-container figure{
+    margin: 0px;
+}
+
+.header__image{
+    width: 80px;
+}
+
+.header__text{
+    color: var(--white);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+@media only screen and (min-width:1000px) {
+    .header__image{
+        width: 120px;
+    }
+
+    .header__text{
+        font-size: 1.8rem;
+    }
+}
+
