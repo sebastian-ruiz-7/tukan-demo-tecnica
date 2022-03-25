@@ -22,8 +22,6 @@ function App() {
 
       <main>
 
-        <h1>BANXICO API VISUALIZER</h1>
-
         <FormContainer />
 
         <ChartsContainers />

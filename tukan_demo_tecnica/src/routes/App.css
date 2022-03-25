@@ -2,15 +2,10 @@
   font-size: 62.5%;
   --blue: #7FC8F8;
   --white: #FFFFFF;
+  --bgInput: #F7F7F7;
 }
 
 body{
   margin: 0;
   font-family: 'Quicksand', sans-serif;
-}
-
-
-
-.charts-container{
-  width: 100vh;
 }
