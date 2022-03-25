@@ -8,7 +8,7 @@ import { AppContext } from '../Context/AppContext'
 export const useCharts = (serie) => {
     const [graphType,setGraphType]=useState("line")
     const [currentSeries,setCurrentsSeries] = useState([serie.idSerie])
-    const {token,dataSeries,setDataSeries}=useContext(AppContext)
+    const {token,dataSeries,setDataSeries,setLoading}=useContext(AppContext)
 
     const getRandomColor=()=>{
       const colors=['#713E5A','#63A375','#EDC79B','#D57A66','#CA6680','#D6E5E3','#CACFD6']
@@ -67,6 +67,8 @@ export const useCharts = (serie) => {
 
     const addMoreSeries=async(addSerie)=>{
         const seriesArray=dataSeries.map(serie=>serie.idSerie)
+
+        //Verify if the series is already loaded in the global context
         if (seriesArray.includes(addSerie)) {
 
           if (currentSeries.includes(addSerie)) {
@@ -90,8 +92,11 @@ export const useCharts = (serie) => {
             setCurrentsSeries(newCurrentSeries)
           }
             
-        }else{
-          //Fetching the new array    
+        }
+        //Fetching the new Serie
+        else{
+          //Fetching the new array   
+          setLoading(true)
           const newSerie=await fetchData(token,addSerie)
           const newDateSeries=[...dataSeries]
           newDateSeries.push(newSerie[0])
@@ -109,6 +114,7 @@ export const useCharts = (serie) => {
             borderColor: randomColor,
             backgroundColor: randomColor,
           })
+          setLoading(false)
         }
     }
 

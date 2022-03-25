@@ -1,6 +1,7 @@
 .section-container{
     width: 100%;
     display: flex;
+    
 }
 
 .chart-container{
@@ -75,7 +76,7 @@
     }
 
     .section__description-text{
-        margin-top: 32px;
+        margin: 24px auto;
         max-width: 500px;
     }
 }
@@ -86,6 +87,7 @@
         width: 95%;
         margin: 0px auto;
         margin-top: 52px;
+        margin-bottom: 24px;
     }
 
     .chart__title{

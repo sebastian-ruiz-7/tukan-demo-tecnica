@@ -5,7 +5,9 @@ export const useInititalState = () => {
 
   const [dataSeries,setDataSeries]=useState([])
 
+  const [loading,setLoading]=useState(false)
+
   return{
-      token,setToken,dataSeries,setDataSeries
+      token,setToken,dataSeries,setDataSeries,loading,setLoading
   }
 }

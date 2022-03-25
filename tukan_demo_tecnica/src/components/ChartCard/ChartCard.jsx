@@ -1,10 +1,14 @@
 //Import dependencies
-import React, { useEffect , useState } from 'react'
+import React, { useContext } from 'react'
 //Import ChartJS
 import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 //Import hooks
 import { useCharts } from '../../hooks/useCharts';
+//Import containers
+import { LoadingModal } from '../../containers/LoadingModal/LoadingModal';
+//Import context
+import { AppContext } from '../../Context/AppContext';
 //Import assets
 import download from '../../assets/download.png'
 //Import styles
@@ -16,6 +20,7 @@ export const ChartCard = ({serie}) => {
 
   const {options,data,graphType,updateGraphType,handleMoreSeries}=useCharts(serie)
   
+  const {loading}=useContext(AppContext)
 
   const downloadImage=()=>{
     const link=document.createElement('a');
@@ -27,9 +32,10 @@ export const ChartCard = ({serie}) => {
     
   return (
 
-    
 
     <section className='section-container'>
+
+      {loading && <LoadingModal />}
 
       <p className='section__description-text'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo sunt illum tempora animi cupiditate praesentium explicabo voluptatem nam quos, laborum impedit, architecto non odit dolorum saepe pariatur dignissimos earum sapiente.</p>
 

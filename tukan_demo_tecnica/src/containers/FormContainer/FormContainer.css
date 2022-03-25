@@ -5,6 +5,14 @@
     margin: 12px 0px;
 }
 
+.error-message{
+    font-size: 1.6rem;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin: 12px;
+}
+
 .form-container{
     min-width: 330px;
     width: 100%;
@@ -51,6 +59,8 @@
     border-radius: 12px;
     border: none;
     margin: 12px 0px;
+    font-weight: bold;
+    font-size: 1.6rem;
 }
 
 .form__button:hover{
