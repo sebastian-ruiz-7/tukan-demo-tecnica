@@ -4,9 +4,6 @@ const API_address='https://5i8qcjp333.execute-api.us-east-1.amazonaws.com/dev/se
 export const fetchData=async(token,series)=>{
     //console.log(`${API_address}${series}?token=${token}`)
     const url=`${API_address}${series}?token=${token}`
-    
-    console.log(token)
-    console.log(series)
 
     let data=await fetch(url,{
         headers:{

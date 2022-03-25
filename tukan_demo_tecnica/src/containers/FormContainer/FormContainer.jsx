@@ -34,8 +34,6 @@ export const FormContainer = () => {
             <label className='form__label' htmlFor="series">Series</label>
             <input className='form__input' type="text" name='series' placeholder='Example: SF61745,SP68257'/>
             <button className='form__button' onClick={handleSubmit}>Fetch</button>
-
-            
       </form>
     </>
   )

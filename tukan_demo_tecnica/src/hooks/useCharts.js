@@ -10,19 +10,6 @@ export const useCharts = (serie) => {
     const [currentSeries,setCurrentsSeries] = useState([serie.idSerie])
     const {token,dataSeries,setDataSeries}=useContext(AppContext)
 
-    // const [options,setOptions] = useState({
-    //     plugins: {
-    //       legend: {
-    //         position: 'top',
-    //       },
-    //       title: {
-    //         display: true,
-    //         text: serie.titulo,
-    //       },
-    
-    //     },
-    //   })
-
     const getRandomColor=()=>{
       const colors=['#713E5A','#63A375','#EDC79B','#D57A66','#CA6680','#D6E5E3','#CACFD6']
 
@@ -38,16 +25,27 @@ export const useCharts = (serie) => {
           },
           title: {
             display: true,
-            text: serie.idSerie + ' - ' + serie.titulo,
+            // text: serie.idSerie + ' - ' + serie.titulo,
           },
     
         },
       }
 
+    const sortDate=(fecha)=>{
+      fecha = fecha.split('/')
+      const month=fecha[1]
+      fecha[1]=fecha[0]
+      fecha[0]=month
+      fecha.join('/')
+      return fecha
+    }
+
     const randomColor=getRandomColor()
 
     const [data,setData] = useState({
-        labels:serie.datos.map(date=>date.fecha),
+        labels:serie.datos.map(date=>{
+          const fecha=sortDate(date.fecha)
+          return new Intl.DateTimeFormat('es-Mx',{month:'short',year:'numeric'}).format(new Date(fecha))}),
         datasets: [
           {
             label: serie.idSerie,
@@ -58,17 +56,6 @@ export const useCharts = (serie) => {
         ],
       })
 
-    // const data={
-    //     labels:serie.datos.map(date=>date.fecha),
-    //     datasets: [
-    //       {
-    //         label: serie.idSerie,
-    //         data: serie.datos.map(value=>value.dato),
-    //         borderColor: 'rgb(255, 99, 132)',
-    //         backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    //       },
-    //     ],
-    //   }
 
     const updateGraphType=(type)=>{
         if (type==='typeGraph') {

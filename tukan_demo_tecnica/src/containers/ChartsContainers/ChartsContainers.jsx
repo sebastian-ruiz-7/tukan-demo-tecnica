@@ -8,8 +8,7 @@ import { AppContext } from '../../Context/AppContext'
 export const ChartsContainers = () => {
 
     const {dataSeries}=useContext(AppContext)
-    console.log(dataSeries)
-
+    
   return (
     <>
         {dataSeries.length>0 && (
